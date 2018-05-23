@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "ES6"
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [
+    "js/**/*",
+    "/../Black/src/**/*",
+    "/../Black/dist/**/*"
+  ]
+}
