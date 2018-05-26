@@ -50,8 +50,8 @@ export default class Item extends DisplayObject {
     this.type = (newType === -1) ? MathEx.randomBetween(1, 5) : newType;
 
     let fx = this.parent.addChild(new FXBoom());
-    fx.x = this.x;
-    fx.y = this.y;
+    fx.x = this.x - 25;
+    fx.y = this.y - 25;
 
     this.deselect();
     this.playHide().on('complete', () => {

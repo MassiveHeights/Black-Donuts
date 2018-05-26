@@ -13,7 +13,8 @@ import {
   InitialPosition,
   RadialScatter,
   BlendMode,
-  MathEx
+  MathEx,
+  Device
 } from 'black';
 
 import FitViewportComponent from '../fit-component';
@@ -22,6 +23,10 @@ export default class CTA extends GameObject {
   constructor() {
     super();
     this.touchable = true;
+
+    document.addEventListener(Device.isMobile ? 'touchstart' : 'mousedown', function (e) {
+      window.location.href = 'http://blacksmith2d.io';
+    });
   }
 
   onAdded() {
@@ -54,9 +59,10 @@ export default class CTA extends GameObject {
     btnPlay.alignPivotOffset();
     btnPlay.touchable = true;
     btnPlay.on('pointerDown', () => btnPlay.scale = 0.95);
-    btnPlay.on('pointerUp', () => {
+
+    document.addEventListener(Device.isMobile ? 'touchstart' : 'mousedown', function (e) {
       btnPlay.scale = 1;
-      window.open('http://blacksmith2d.io', '_blank');
+      window.location.href = 'http://blacksmith2d.io';
     });
 
     let targetBtnY = donut.y + donut.height / 2 + btnPlay.height / 2 + 50;
@@ -69,12 +75,12 @@ export default class CTA extends GameObject {
       donut.scale = 3;
       shadow.alpha = 0;
       btnPlay.scale = 0;
-      
+
       btnPlay.add(
         new Tween({ y: targetBtnY }, 0.3, { delay: 0.3, ease: Ease.backOut }),
         new Tween({ scale: 1 }, 0.4, { delay: 0.25, ease: Ease.backOut })
       );
-      
+
       bg.add(new Tween({ alpha: 0.4 }, 0.3));
       logo.add(new Tween({ scale: 1 }, 0.3, { ease: Ease.backOut, delay: 0.2 }));
       donut.add(new Tween({ scale: 1 }, 0.3, { ease: Ease.backOut }));

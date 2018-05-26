@@ -1,4 +1,12 @@
-import { GameObject, TextField, AssetManager, Black, Emitter, TextStyle, Graphics, CapsStyle, JointStyle, Sprite, Time, Vector, Tween, Ease, Input } from 'black';
+import {
+  GameObject, TextField, AssetManager, Black, TextStyle, Graphics, CapsStyle, JointStyle, Sprite, Time, Vector, Tween, Ease, Input, BlendMode, FloatScatter,
+  Emitter,
+  InitialLife,
+  ScaleOverLife,
+  AlphaOverLife,
+  Acceleration,
+  MathEx
+} from 'black';
 import Background from './objects/background';
 import Board from './objects/board';
 import CTA from './objects/cta';
@@ -11,7 +19,7 @@ export default class Game extends GameObject {
     super();
     this.touchable = true;
     this.score = 0;
-    this.targetScore = 50;
+    this.targetScore = 500;
     this.tutorialVisible = false;
 
     this.hintOnIdleTime = 6;
@@ -47,8 +55,6 @@ export default class Game extends GameObject {
     this.textTable = this.addChild(new TextTable());
 
     this.selection = new Graphics();
-    this.selection.lineStyle(80, 0xffffff, 0.7, CapsStyle.ROUND, JointStyle.ROUND);
-    this.selection.visible = false;
     this.addChild(this.selection);
 
     this.hint = this.addChild(new Hint());
@@ -68,9 +74,10 @@ export default class Game extends GameObject {
     this.hint.hide();
 
     this.selection.clear();
-    this.selection.lineStyle(80, 0xffffff, 0.7, CapsStyle.ROUND, JointStyle.ROUND);
 
     var ns = ((items.length * 10) + ((items.length * 10 - 30) * Math.sqrt(items.length))) * 1;
+    ns /= 2;
+    ns = ~~ns;
     this.addScore(ns);
 
     if (this.score >= this.targetScore)
@@ -79,25 +86,33 @@ export default class Game extends GameObject {
 
   addScore(count) {
     this.score += ~~count;
-    this.textTable.setText(`Score: ${this.score}/${this.targetScore}`);
+
+    if (this.score > this.targetScore)
+      this.score = this.targetScore;
+
+    this.textTable.setScore(`Score: ${this.score}/${this.targetScore}`);
   }
 
   onItemSelected(msg, item, items) {
     let sx = items[0].x;
     let sy = items[0].y;
 
+    this.selection.clear();
+    this.selection.beginPath();
+    this.selection.lineStyle(40, 0xffffff, 0.7, CapsStyle.ROUND, JointStyle.ROUND);
+    this.selection.moveTo(sx - 25, sy - 25);
+
     for (let i = 1; i < items.length; i++) {
       let it = items[i];
 
-      this.selection.drawLine(sx, sy, it.x, it.y);
-      sx = it.x;
-      sy = it.y;
+      this.selection.lineTo(it.x - 25, it.y - 25);
     }
+
+    this.selection.stroke();
   }
 
   onAllDeselected() {
     this.selection.clear();
-    this.selection.lineStyle(80, 0xffffff, 0.7, CapsStyle.ROUND, JointStyle.ROUND);
   }
 
   showCTA() {
