@@ -1,8 +1,8 @@
-import { Black, Device, CanvasDriver, StageScaleMode, StageOrientation, Input, Renderer, Debug } from 'black';
+import { Black, Device, CanvasDriver, StageScaleMode, StageOrientation, Input, Renderer, Debug, MasterAudio } from 'black';
 import Game from './game';
 import { PerfMonitor, FPSCounter, DeltaCounter, BlackObjectsCounter, BlackParticleCounter } from './perf-monitor';
 
-const black = new Black('container', Game, CanvasDriver, [Input]);
+const black = new Black('container', Game, CanvasDriver, [Input, MasterAudio]);
 black.enableFixedTimeStep = false;
 black.pauseOnBlur = false;
 black.pauseOnHide = false;

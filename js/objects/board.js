@@ -68,10 +68,10 @@ export default class Board extends GameObject {
 
     const centerY = this.gridHeight / 2;
     const centerX = this.gridWidth / 2;
+    const maxDistance = MathEx.distance(0, 0, centerX, centerY);
 
     const animate = item => {
       let distance = MathEx.distance(item.cx, item.cy, centerX, centerY);
-      let maxDistance = MathEx.distance(0, 0, centerX, centerY);
       let delay = MathEx.lerp(0.5, 0, distance / maxDistance);
 
       item.playHide(delay, Ease.backIn);
