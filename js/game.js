@@ -64,7 +64,6 @@ export default class Game extends GameObject {
 
     assets.enqueueSound('background', 'background.mp3');
     assets.enqueueSound('itemKill', 'kill.mp3');
-    assets.enqueueSound('click', 'click.mp3');
     this.selectSounds.forEach(x => assets.enqueueSound(x, x + '.mp3'));
 
     assets.on('complete', this.onAssetsLoadded, this);
