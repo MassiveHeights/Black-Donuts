@@ -11,8 +11,8 @@
     "type": "git",
     "url": "git+https://github.com/MassiveHeights/Black-Donuts.git"
   },
-  "author": "~",
-  "license": "MIT",
+  "author": "Massive Heights",
+  "license": "SEE LICENSE IN LICENSE.md",
   "homepage": "https://blacksmith2d.io",
   "devDependencies": {
     "babel-cli": "^6.24.1",
@@ -25,7 +25,7 @@
     "babel-preset-stage-0": "^6.24.1",
     "babel-root-slash-import": "^1.1.0",
     "babelify": "^7.3.0",
-    "black": "git@github.com:MassiveHeights/Black.git",
+    "black": "git+https://github.com/MassiveHeights/Black.git",
     "browser-sync": "^2.18.12",
     "browserify": "^14.4.0",
     "del": "^3.0.0",

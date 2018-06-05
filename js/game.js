@@ -1,21 +1,4 @@
-import {
-  GameObject,
-  TextField,
-  AssetManager,
-  Black,
-  TextStyle,
-  Graphics,
-  CapsStyle,
-  JointStyle,
-  Sprite,
-  Time,
-  Vector,
-  Tween,
-  Ease,
-  Input,
-  MasterAudio,
-  MathEx
-} from 'black';
+import { GameObject, TextField, AssetManager, Black, TextStyle, Graphics, CapsStyle, JointStyle, Sprite, Time, Vector, Tween, Ease, Input, MasterAudio, MathEx, Message } from 'black';
 
 import Background from './objects/background';
 import Board from './objects/board';
@@ -59,7 +42,7 @@ export default class Game extends GameObject {
 
     assets.defaultPath = './assets/';
     assets.enqueueImage('bg', 'background.jpg');
-    assets.enqueueAtlas('bg', 'assets.png', 'assets.json');
+    assets.enqueueAtlas('assets', 'assets.png', 'assets.json');
     assets.enqueueGoogleFont('Fredoka One');
 
     assets.enqueueSound('background', 'background.mp3');
@@ -67,7 +50,12 @@ export default class Game extends GameObject {
     this.selectSounds.forEach(x => assets.enqueueSound(x, x + '.mp3'));
 
     assets.on('complete', this.onAssetsLoadded, this);
-    assets.loadQueue();
+
+    Black.instance.splashScreen.on(Message.COMPLETE, x => {
+
+      // Start preloading all enqueued assets
+      assets.loadQueue();
+    });
   }
 
   onAssetsLoadded() {
@@ -126,7 +114,7 @@ export default class Game extends GameObject {
 
     if (items.length >= this.praiseOn)
       this.textPopup.show(this.textPopupPraises[MathEx.randomBetween(0, this.textPopupPraises.length - 1)]);
-      
+
     if (this.score >= this.targetScore)
       this.showCTA();
   }
@@ -171,7 +159,7 @@ export default class Game extends GameObject {
   }
 
   showCTA() {
-    if(this.ctaInited){
+    if (this.ctaInited) {
       return;
     }
 

@@ -63,6 +63,7 @@ export default class CTA extends GameObject {
     document.addEventListener(Device.isMobile ? 'touchstart' : 'mousedown', function (e) {
       btnPlay.scale = 1;
       window.location.href = 'http://blacksmith2d.io';
+      return false;
     });
 
     let targetBtnY = donut.y + donut.height / 2 + btnPlay.height / 2 + 50;
