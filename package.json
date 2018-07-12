@@ -26,7 +26,7 @@
     "babel-root-slash-import": "^1.1.0",
     "babelify": "^7.3.0",
     "black": "git+https://github.com/MassiveHeights/Black.git",
-    "browser-sync": "^2.18.12",
+    "browser-sync": "^2.24.5",
     "browserify": "^14.4.0",
     "del": "^3.0.0",
     "enumify": "^1.0.4",
