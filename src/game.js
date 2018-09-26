@@ -40,14 +40,22 @@ export default class Game extends GameObject {
   load() {
     let assets = AssetManager.default;
 
-    assets.defaultPath = './assets/';
-    assets.enqueueImage('bg', 'background.jpg');
-    assets.enqueueAtlas('assets', 'assets.png', 'assets.json');
+    // assets.defaultPath = './assets/'
+    assets.enqueueImage('bg', require('res/textures/background.jpg'));
+    assets.enqueueAtlas('assets', require('res/sheets/assets.png'), require('res/sheets/assets.json'));
     assets.enqueueGoogleFont('Fredoka One');
 
-    assets.enqueueSound('background', 'background.mp3');
-    assets.enqueueSound('itemKill', 'kill.mp3');
-    this.selectSounds.forEach(x => assets.enqueueSound(x, x + '.mp3'));
+    assets.enqueueSound('background', require('res/audio/background.mp3'));
+    assets.enqueueSound('itemKill', require('res/audio/kill.mp3'));
+    assets.enqueueSound('select-1', require('res/audio/select-1.mp3'));
+    assets.enqueueSound('select-2', require('res/audio/select-2.mp3'));
+    assets.enqueueSound('select-3', require('res/audio/select-3.mp3'));
+    assets.enqueueSound('select-4', require('res/audio/select-4.mp3'));
+    assets.enqueueSound('select-5', require('res/audio/select-5.mp3'));
+    assets.enqueueSound('select-6', require('res/audio/select-6.mp3'));
+    assets.enqueueSound('select-7', require('res/audio/select-7.mp3'));
+    assets.enqueueSound('select-8', require('res/audio/select-8.mp3'));
+    assets.enqueueSound('select-9', require('res/audio/select-9.mp3'));
 
     assets.on('complete', this.onAssetsLoadded, this);
 
