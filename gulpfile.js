@@ -29,7 +29,7 @@ const cfgBrowserify = {
 
 const cfgTransform = {
   'global': true,
-  'only': /^(?:.*\/node_modules\/black\/|(?!.*\/node_modules\/)).*$/,
+  'only': /^(?:.*\/node_modules\/black-engine\/|(?!.*\/node_modules\/)).*$/,
   'presets': ['es2015', 'stage-0'],
   'plugins': [
     ['babel-root-slash-import', {
@@ -51,10 +51,10 @@ const preprocessCfg = {
 bundler = bundler.transform(preprocessify, preprocessCfg);
 
 
-const defPath = './node_modules/black/package.json';
-const originalPath = './node_modules/black/package-original.json';
-const devPath = './node_modules/black/package-development.json';
-const prodPath = './node_modules/black/package-production.json';
+const defPath = './node_modules/black-engine/package.json';
+const originalPath = './node_modules/black-engine/package-original.json';
+const devPath = './node_modules/black-engine/package-development.json';
+const prodPath = './node_modules/black-engine/package-production.json';
 
 function preparePackages() {
   fs.copyFileSync(defPath, prodPath);
@@ -143,10 +143,10 @@ gulp.task('restore-package', function (done) {
 });
 
 gulp.task('strip-debug', function () {
-  return gulp.src(['./node_modules/black/dist/black-es6-module.js'], {})
+  return gulp.src(['./node_modules/black-engine/dist/black-es6-module.js'], {})
     .pipe(preprocess())
     .pipe(stripDebug())
-    .pipe(gulp.dest('./node_modules/black/dist/gcc/'));
+    .pipe(gulp.dest('./node_modules/black-engine/dist/gcc/'));
 });
 
 gulp.task('compile-gcc', function () {
@@ -171,7 +171,7 @@ gulp.task('compile-gcc', function () {
       process_common_js_modules: true,
       generate_exports: true,
       export_local_property_definitions: true,
-      js: ['./__scripts__/base.js', 'node_modules/black/dist/gcc/black-es6-module.js', 'node_modules/black/package.json']
+      js: ['./__scripts__/base.js', 'node_modules/black-engine/dist/gcc/black-es6-module.js', 'node_modules/black/package.json']
     }))
     .pipe(buffer())
     .pipe(gulp.dest('./dist'));

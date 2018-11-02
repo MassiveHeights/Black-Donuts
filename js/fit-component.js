@@ -1,4 +1,4 @@
-import { Black, Component, DisplayObject, Rectangle, Vector } from 'black';
+import { Black, Component, DisplayObject, Rectangle, Vector } from 'black-engine';
 
 export default class FitViewportComponent extends Component {
   constructor(align = 'middleCenter', bounds = null, fillRect = true) {

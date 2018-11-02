@@ -8,7 +8,7 @@ import {
   BlendMode,
   Acceleration,
   InitialVelocity
-} from 'black';
+} from 'black-engine';
 
 export default class FXBoom extends GameObject {
   constructor(type) {

@@ -1,4 +1,4 @@
-import { Black, GameObject, Emitter } from "black";
+import { Black, GameObject, Emitter } from "black-engine";
 
 export class PerfMonitor {
   constructor() {

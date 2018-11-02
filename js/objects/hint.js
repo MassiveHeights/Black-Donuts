@@ -1,4 +1,4 @@
-import { GameObject, Sprite, Tween, Vector, Ease, MathEx, Time } from 'black';
+import { GameObject, Sprite, Tween, Vector, Ease, MathEx, Time } from 'black-engine';
 
 export default class Hint extends Sprite {
   constructor() {

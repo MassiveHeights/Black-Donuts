@@ -1,4 +1,4 @@
-import { GameObject, TextField, AssetManager, Black, TextStyle, Graphics, CapsStyle, JointStyle, Sprite, Time, Vector, Tween, Ease, Input, MasterAudio, MathEx, Message } from 'black';
+import { GameObject, TextField, AssetManager, Black, TextStyle, Graphics, CapsStyle, JointStyle, Sprite, Time, Vector, Tween, Ease, Input, MasterAudio, MathEx, Message } from 'black-engine';
 
 import Background from './objects/background';
 import Board from './objects/board';

@@ -1,4 +1,4 @@
-import { GameObject, MathEx, Tween, Ease, TextField, TextStyle } from 'black';
+import { GameObject, MathEx, Tween, Ease, TextField, TextStyle } from 'black-engine';
 
 export default class ScorePopup extends GameObject {
   constructor(score) {

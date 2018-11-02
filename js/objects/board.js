@@ -1,4 +1,4 @@
-import { GameObject, Input, MathEx, Tween, Ease, Vector } from 'black';
+import { GameObject, Input, MathEx, Tween, Ease, Vector } from 'black-engine';
 import Item from './item';
 import FitViewportComponent from '../fit-component';
 

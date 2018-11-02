@@ -1,4 +1,4 @@
-import { DisplayObject, MathEx, Sprite, CircleCollider, Tween, Ease, TextField, AssetManager, ObjectPool } from 'black';
+import { DisplayObject, MathEx, Sprite, CircleCollider, Tween, Ease, TextField, AssetManager, ObjectPool } from 'black-engine';
 import Board from './board';
 import FXBoom from './fx-boom';
 

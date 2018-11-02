@@ -10,7 +10,7 @@ import {
   AlphaOverLife,
   Acceleration,
   MathEx
-} from 'black';
+} from 'black-engine';
 
 export default class FXTrail extends DisplayObject {
   constructor() {

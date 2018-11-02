@@ -1,4 +1,4 @@
-import { Sprite } from 'black';
+import { Sprite } from 'black-engine';
 
 export default class Background extends Sprite {
   constructor(texture) {

@@ -15,7 +15,7 @@ import {
   BlendMode,
   MathEx,
   Device
-} from 'black';
+} from 'black-engine';
 
 import FitViewportComponent from '../fit-component';
 

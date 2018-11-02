@@ -1,4 +1,4 @@
-import { Black, Device, CanvasDriver, StageScaleMode, StageOrientation, Input, Renderer, Debug, MasterAudio } from 'black';
+import { Black, Device, CanvasDriver, StageScaleMode, StageOrientation, Input, Renderer, Debug, MasterAudio } from 'black-engine';
 import Game from './game';
 import { PerfMonitor, FPSCounter, DeltaCounter, BlackObjectsCounter, BlackParticleCounter } from './perf-monitor';
 
