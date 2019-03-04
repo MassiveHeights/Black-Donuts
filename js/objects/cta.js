@@ -18,6 +18,7 @@ import {
 } from 'black-engine';
 
 import FitViewportComponent from '../fit-component';
+import LP from '../lp';
 
 export default class CTA extends GameObject {
   constructor() {
@@ -39,7 +40,7 @@ export default class CTA extends GameObject {
     let centerContainer = this.centerContainer = this.addChild(new GameObject());
     centerContainer.x = this.stage.centerX;
     centerContainer.y = this.stage.centerY;
-    centerContainer.scale = this.stage.LP(0.7, 1);
+    centerContainer.scale = LP(0.7, 1);
     centerContainer.touchable = true;
 
     let donut = new Sprite('donut');
@@ -94,6 +95,6 @@ export default class CTA extends GameObject {
   onResize() {
     this.centerContainer.x = this.stage.centerX;
     this.centerContainer.y = this.stage.centerY;
-    this.centerContainer.scale = this.stage.LP(0.7, 1);
+    this.centerContainer.scale = LP(0.7, 1);
   }
 }

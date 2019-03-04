@@ -8,6 +8,7 @@ import TextTable from './objects/text-table';
 import FXTrail from './objects/fx-trail';
 import ScorePopup from './objects/score-popup';
 import TextPopup from './objects/text-popup';
+import LP from './lp';
 
 export default class Game extends GameObject {
   constructor() {
@@ -63,7 +64,7 @@ export default class Game extends GameObject {
 
     this.addChild(new Background('bg'));
 
-    this.board = this.addChild(new Board(this.stage.LP(7, 6), this.stage.LP(5, 8)));
+    this.board = this.addChild(new Board(LP(7, 6), LP(5, 8)));
     this.board.x = this.stage.centerX + 15;
     this.board.y = this.stage.centerY + 50;
     this.board.on('pointerDown', x => this.hint.hide(), this);

@@ -1,6 +1,5 @@
-import { Black, Device, CanvasDriver, StageScaleMode, StageOrientation, Input, Renderer, Debug, MasterAudio } from 'black-engine';
+import { Black, CanvasDriver, Input, MasterAudio, Orientation, StageScaleMode } from 'black-engine';
 import Game from './game';
-import { PerfMonitor, FPSCounter, DeltaCounter, BlackObjectsCounter, BlackParticleCounter } from './perf-monitor';
 
 const black = new Black('container', Game, CanvasDriver, [Input, MasterAudio]);
 black.enableFixedTimeStep = false;
@@ -11,7 +10,7 @@ black.start();
 
 black.stage.scaleMode = StageScaleMode.LETTERBOX;
 black.stage.setSize(960, 640);
-black.stage.orientation = StageOrientation.UNIVERSAL;
+black.viewport.orientation = Orientation.UNIVERSAL;
 
 // let perf = new PerfMonitor(1);
 // perf.add(new FPSCounter());
