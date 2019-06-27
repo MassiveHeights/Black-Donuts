@@ -1,4 +1,4 @@
-import { GameObject, MathEx, Tween, Ease, TextField, TextStyle } from 'black-engine';
+import { Ease, GameObject, TextField, TextStyle, Tween, FontStyle, FontWeight } from 'black-engine';
 
 export default class ScorePopup extends GameObject {
   constructor(score) {
@@ -7,7 +7,7 @@ export default class ScorePopup extends GameObject {
   }
 
   onAdded() {
-    let staticStyle = new TextStyle('Fredoka One', 0xe85656, 40, TextStyle.FontStyle.NORMAL, TextStyle.FontWeight.BOLD, 4, 0xfffdd4);
+    let staticStyle = new TextStyle('Fredoka One', 0xe85656, 40, FontStyle.NORMAL, FontWeight.BOLD, 4, 0xfffdd4);
     let textField = new TextField();
 
     textField.setDefaultStyle(staticStyle);

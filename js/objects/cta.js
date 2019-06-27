@@ -1,22 +1,4 @@
-import {
-  GameObject,
-  Sprite,
-  Tween,
-  Ease,
-  FloatScatter,
-  Emitter,
-  AssetManager,
-  EmitterSortOrder,
-  InitialLife,
-  ScaleOverLife,
-  InitialVelocity,
-  InitialPosition,
-  RadialScatter,
-  BlendMode,
-  MathEx,
-  Device
-} from 'black-engine';
-
+import { Device, Ease, GameObject, Sprite, Tween, Black } from 'black-engine';
 import FitViewportComponent from '../fit-component';
 import LP from '../lp';
 
@@ -61,7 +43,7 @@ export default class CTA extends GameObject {
     btnPlay.touchable = true;
     btnPlay.on('pointerDown', () => btnPlay.scale = 0.95);
 
-    document.addEventListener(Device.isMobile ? 'touchstart' : 'mousedown', function (e) {
+    document.addEventListener(Black.device.isMobile ? 'touchstart' : 'mousedown', function (e) {
       btnPlay.scale = 1;
       window.location.href = 'http://blacksmith2d.io';
       return false;

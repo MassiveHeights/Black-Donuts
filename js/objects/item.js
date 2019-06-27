@@ -1,4 +1,4 @@
-import { DisplayObject, MathEx, Sprite, CircleCollider, Tween, Ease, TextField, AssetManager, ObjectPool } from 'black-engine';
+import { DisplayObject, MathEx, Sprite, CircleCollider, Tween, Ease, TextField, AssetManager, ObjectPool, Black } from 'black-engine';
 import Board from './board';
 import FXBoom from './fx-boom';
 
@@ -55,7 +55,7 @@ export default class Item extends DisplayObject {
 
     this.deselect();
     this.playHide().on('complete', () => {
-      this.fg.texture = AssetManager.default.getTexture(`player-${this.type}`);
+      this.fg.texture = Black.assets.getTexture(`player-${this.type}`);
       this.playShow();
     });
   }

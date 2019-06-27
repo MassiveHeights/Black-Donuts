@@ -1,10 +1,13 @@
-import { GameObject, Input, MathEx, Tween, Ease, Vector } from 'black-engine';
+import { Black, Ease, GameObject, Input, MathEx } from 'black-engine';
 import Item from './item';
-import FitViewportComponent from '../fit-component';
 
 export default class Board extends GameObject {
-  constructor(w, h) {
+  constructor() {
     super();
+
+    let w = 26;
+    let h = 26;
+
     this.touchable = true;
 
     this.gridWidth = w;
@@ -19,7 +22,7 @@ export default class Board extends GameObject {
     this.grid = [];
     this.items = [];
 
-    Input.on(Input.POINTER_UP, this.onPointerUp, this);
+    Black.input.on(Input.POINTER_UP, this.onPointerUp, this);
   }
 
   onAdded() {
@@ -45,7 +48,7 @@ export default class Board extends GameObject {
 
   trySelect() {
     for (const item of this.items) {
-      let contains = item.hitTest(Input.pointerPosition);
+      let contains = item.hitTest(Black.input.pointerPosition);
 
       if (item.selected || !contains)
         continue;
@@ -219,7 +222,7 @@ export default class Board extends GameObject {
   }
 
   onUpdate(dt) {
-    if (Input.isPointerDown && this.isEnabled) {
+    if (Black.input.isPointerDown && this.isEnabled) {
       this.clicked = true;
       this.trySelect();
     }

@@ -1,8 +1,7 @@
 import { Device, Black, Orientation } from "black-engine";
 
 export default function LP(landscape, portrait) {
-
-  const viewport = Black.instance.viewport;
+  const viewport = Black.engine.viewport;
 
   if (viewport.orientationLock == true) {
     if (viewport.orientation === Orientation.UNIVERSAL) {
@@ -14,5 +13,6 @@ export default function LP(landscape, portrait) {
     }
   }
 
-  return Device.isLandscape ? landscape : portrait;
+  
+  return viewport.isLandscape ? landscape : portrait;
 }

@@ -1,16 +1,4 @@
-import {
-  DisplayObject,
-  FloatScatter,
-  Emitter,
-  AssetManager,
-  InitialLife,
-  ScaleOverLife,
-  Input,
-  BlendMode,
-  AlphaOverLife,
-  Acceleration,
-  MathEx
-} from 'black-engine';
+import { Acceleration, AlphaOverLife, BlendMode, DisplayObject, Emitter, FloatScatter, InitialLife, Input, MathEx, ScaleOverLife, Black } from 'black-engine';
 
 export default class FXTrail extends DisplayObject {
   constructor() {
@@ -31,7 +19,7 @@ export default class FXTrail extends DisplayObject {
     this.emitter.emitNumRepeats = new FloatScatter(Infinity);
 
     // Pick a texture for emitting
-    this.emitter.textures = AssetManager.default.getTextures('particle_ex*');
+    this.emitter.textures = Black.assets.getTextures('particle_ex*');
 
     this.emitter.x = 960 / 2;
     this.emitter.y = 640 / 2;
@@ -50,8 +38,8 @@ export default class FXTrail extends DisplayObject {
     if (!this.emitter)
       return;
 
-    if (Input.isPointerDown) {
-      let point = this.globalToLocal(Input.pointerPosition);
+    if (Black.input.isPointerDown) {
+      let point = this.globalToLocal(Black.input.pointerPosition);
       let t = this.isDirty ? 1 : 0.2;
 
       this.emitter.x = MathEx.lerp(this.emitter.x, point.x, t);
