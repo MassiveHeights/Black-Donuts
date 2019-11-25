@@ -1,10 +1,22 @@
-import { Ease, FontStyle, FontWeight, GameObject, TextField, TextStyle, Tween } from 'black-engine';
+import { GameObject, Sprite, Tween, Ease, MathEx, TextStyle, FontStyle, FontWeight, FontAlign, TextField } from 'black-engine';
 
 export default class TextPopup extends GameObject {
   constructor() {
     super();
+
+    /**
+     * @type {TextField}
+     */
     this.textField = null;
+
+    /**
+     * @type {boolean}
+     */
     this.inProgress = false;
+
+    /**
+     * @type {Array<string>}
+     */
     this.queue = [];
   }
 
@@ -14,15 +26,15 @@ export default class TextPopup extends GameObject {
     staticStyle.shadowColor = 0x000000;
     staticStyle.shadowDistanceX = 12;
     staticStyle.shadowDistanceY = 12;
-    staticStyle.shadowBlur = 6;
+    staticStyle.shadowBlur = 8;
     staticStyle.shadowAlpha = 0.5;
 
     this.textField = new TextField();
     this.textField.setDefaultStyle(staticStyle);
     this.textField.autoSize = true;
-    this.textField.align = 'center';
+    this.textField.align = FontAlign.CENTER;
     this.textField.x = this.width / 2;
-    this.textField.y = this.height / 2;
+    this.textField.y = this.height / 2 + 22;
     this.textField.multiline = true;
     this.textField.lineHeight = 2.5;
 
@@ -49,9 +61,8 @@ export default class TextPopup extends GameObject {
 
     let r = Math.random() > 0.5 ? 1 : -1;
 
-    this.addComponent(new Tween({ scale: 1 }, 0.2, { ease: Ease.backOut }));
-    this.addComponent(new Tween({ rotation: [0.1 * r, 0] }, 0.2, { ease: Ease.sinusoidalInOut, delay: 0.2 }));
-    
+    let t1 = this.addComponent(new Tween({ scale: 1 }, 0.2, { ease: Ease.backOut }));
+    let t2 = this.addComponent(new Tween({ rotation: [0.1 * r, 0] }, 0.2, { ease: Ease.sinusoidalInOut, delay: 0.2 }));
     let t3 = this.addComponent(new Tween({ scale: 0 }, 0.15, { ease: Ease.backIn, delay: 0.65 }));
 
     t3.on('complete', this._onComplete, this);

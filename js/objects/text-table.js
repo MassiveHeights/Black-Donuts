@@ -1,31 +1,40 @@
-import { GameObject, Sprite, Tween, Ease, MathEx, TextStyle, TextField, FontStyle, FontWeight } from 'black-engine';
+import { GameObject, Sprite, Tween, Ease, MathEx, TextStyle, FontStyle, FontWeight, FontAlign, TextField } from 'black-engine';
 
 export default class TextTable extends Sprite {
   constructor() {
     super('table');
-    this.alignPivotOffset(0.5, 0);
+
+    /** @type {TextStyle|null} */
+    this.textStyle = null;
+
+    /** @type {TextField|null} */
+    this.textField = null;
   }
 
   onAdded() {
-    let staticStyle = this.ss = new TextStyle('Fredoka One', 0xe85656, 34, FontStyle.NORMAL, FontWeight.BOLD, 4, 0xfffdd4);
+    this.textStyle = new TextStyle('Fredoka One', 0xe85656, 34, FontStyle.NORMAL, FontWeight.BOLD, 4, 0xfffdd4);
+
+    let staticStyle = this.textStyle;
     staticStyle.dropShadow = true;
     staticStyle.shadowColor = 0x000000;
     staticStyle.shadowDistanceX = 4;
     staticStyle.shadowDistanceY = 4;
-    staticStyle.shadowBlur = 3;
-    this.style = staticStyle;
+    staticStyle.shadowBlur = 1;
 
     this.textField = new TextField();
     this.textField.setStyle('static', staticStyle);
     this.textField.autoSize = true;
-    this.textField.align = 'center';
+    this.textField.align = FontAlign.CENTER;
     this.textField.x = this.width / 2;
-    this.textField.y = this.height / 2 + 0;
+    this.textField.y = this.height / 2 + 15;
     this.textField.multiline = true;
-    this.textField.lineHeight = 2;
+    this.textField.lineHeight = 2.5;
 
     this.textField.alignPivotOffset(0.5, 0.5);
     this.addChild(this.textField);
+
+    this.setText('Match 3 or more!', false);
+    this.alignPivotOffset(0.5, 0.5);
   }
 
   setText(value, tween = true) {
@@ -40,9 +49,9 @@ export default class TextTable extends Sprite {
   setScore(v) {
     this.setText(v);
 
-    this.style.size = 41;
+    this.textStyle.size = 41;
 
-    this.textField.y = this.height / 2 + 22;
+    this.textField.y = this.height / 2 + 20;
     this.textField.alignPivotOffset(0.5, 0.5);
   }
 }

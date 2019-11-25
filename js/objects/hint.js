@@ -1,9 +1,8 @@
-import { Ease, MathEx, Sprite, Tween, Vector } from 'black-engine';
+import { GameObject, Sprite, Tween, Vector, Ease, MathEx, Time } from 'black-engine';
 
 export default class Hint extends Sprite {
   constructor() {
     super('hand');
-    
     this.speed = 0.005;
     this.visible = false;
     this.inProgress = false;

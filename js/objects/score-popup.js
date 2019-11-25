@@ -1,4 +1,4 @@
-import { Ease, GameObject, TextField, TextStyle, Tween, FontStyle, FontWeight } from 'black-engine';
+import { GameObject, MathEx, Tween, Ease, TextField, FontStyle, FontWeight, FontAlign, TextStyle } from 'black-engine';
 
 export default class ScorePopup extends GameObject {
   constructor(score) {
@@ -12,7 +12,7 @@ export default class ScorePopup extends GameObject {
 
     textField.setDefaultStyle(staticStyle);
     textField.autoSize = true;
-    textField.align = 'center';
+    textField.align = FontAlign.CENTER;;
     textField.text = this.score.toString();
 
     textField.alignPivotOffset(0.5, 0.5);

@@ -1,14 +1,22 @@
-import { Acceleration, AlphaOverLife, BlendMode, DisplayObject, Emitter, FloatScatter, InitialLife, Input, MathEx, ScaleOverLife, Black } from 'black-engine';
+import { Black, DisplayObject, FloatScatter, Emitter, AssetManager, InitialLife, ScaleOverLife, Input, BlendMode, AlphaOverLife, Acceleration, MathEx } from 'black-engine';
 
 export default class FXTrail extends DisplayObject {
   constructor() {
     super();
+
+    /**
+     * @type {boolean}
+     */
     this.isDirty = false;
+
+    /**
+     * @type {Emitter|null}
+     */
+    this.emitter = null;
   }
 
   onAdded() {
-    this.type = 1;
-    this.emitter = this.addChild(new Emitter());
+    this.emitter = new Emitter();
     this.emitter.blendMode = BlendMode.ADD;
 
     // Zero all default values since we dont need any particles at the start
@@ -32,6 +40,8 @@ export default class FXTrail extends DisplayObject {
     this.emitter.add(new ScaleOverLife(0.3, 0.6));
     this.emitter.add(new Acceleration(-600, -600, 600, 600));
     this.emitter.add(new AlphaOverLife(1, 0));
+
+    this.addChild(this.emitter);
   }
 
   onUpdate() {

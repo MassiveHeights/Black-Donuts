@@ -1,15 +1,37 @@
-import { Device, Ease, GameObject, Sprite, Tween, Black } from 'black-engine';
+import {
+  GameObject,
+  Sprite,
+  Tween,
+  Ease,
+  FloatScatter,
+  Emitter,
+  AssetManager,
+  EmitterSortOrder,
+  InitialLife,
+  ScaleOverLife,
+  InitialVelocity,
+  InitialPosition,
+  RadialScatter,
+  BlendMode,
+  MathEx,
+  Device
+} from 'black-engine';
+
 import FitViewportComponent from '../fit-component';
 import LP from '../lp';
 
 export default class CTA extends GameObject {
   constructor() {
     super();
+
     this.touchable = true;
 
     document.addEventListener(Device.isMobile ? 'touchstart' : 'mousedown', function (e) {
       window.location.href = 'http://blacksmith2d.io';
     });
+
+    /** @type {GameObject} */
+    this.centerContainer = null;
   }
 
   onAdded() {
@@ -19,11 +41,14 @@ export default class CTA extends GameObject {
     bg.alpha = 0;
     bg.add(new FitViewportComponent());
 
-    let centerContainer = this.centerContainer = this.addChild(new GameObject());
+    let centerContainer = new GameObject();
     centerContainer.x = this.stage.centerX;
     centerContainer.y = this.stage.centerY;
     centerContainer.scale = LP(0.7, 1);
     centerContainer.touchable = true;
+    this.addChild(centerContainer);
+    
+    this.centerContainer = centerContainer;
 
     let donut = new Sprite('donut');
     donut.alignPivotOffset();
@@ -43,7 +68,7 @@ export default class CTA extends GameObject {
     btnPlay.touchable = true;
     btnPlay.on('pointerDown', () => btnPlay.scale = 0.95);
 
-    document.addEventListener(Black.device.isMobile ? 'touchstart' : 'mousedown', function (e) {
+    document.addEventListener(Device.isMobile ? 'touchstart' : 'mousedown', function (e) {
       btnPlay.scale = 1;
       window.location.href = 'http://blacksmith2d.io';
       return false;

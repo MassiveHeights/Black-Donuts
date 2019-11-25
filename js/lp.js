@@ -13,6 +13,5 @@ export default function LP(landscape, portrait) {
     }
   }
 
-  
-  return viewport.isLandscape ? landscape : portrait;
+  return Device.isLandscape ? landscape : portrait;
 }

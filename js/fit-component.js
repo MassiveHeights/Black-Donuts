@@ -8,6 +8,8 @@ export default class FitViewportComponent extends Component {
     this.bounds = bounds;
     this.mFillRect = fillRect;
     this.mIsActive = true;
+
+    this.mResizeListener = null;
   }
 
   updateLayout() {
@@ -28,18 +30,18 @@ export default class FitViewportComponent extends Component {
   }
 
   onAdded(gameObject) {
-    Black.stage.on('resize', this.__onViewResize, this);
+    this.mResizeListener = Black.stage.on('resize', this.__onViewResize, this);
 
     this.post('update');
     this.updateLayout();
 
     gameObject.onRemoved = () => {
-      Black.stage.off('resize', this.__onViewResize);
+      this.mResizeListener.off();
     };
   }
 
   onRemoved(gameObject) {
-    Black.stage.off('resize', this.__onViewResize, this);
+    this.mResizeListener.off();
   }
 
   fitIntoRect(displayObject, bounds, fillRect, align) {

@@ -1,18 +1,30 @@
-import { Black, Ease, GameObject, Input, MathEx } from 'black-engine';
+import { Black, GameObject, Input, MathEx, Tween, Ease, Vector } from 'black-engine';
 import Item from './item';
+import FitViewportComponent from '../fit-component';
 
 export default class Board extends GameObject {
-  constructor() {
+  constructor(w, h) {
     super();
-
-    let w = 26;
-    let h = 26;
-
     this.touchable = true;
 
+    /**
+     * @type {number}
+     */
     this.gridWidth = w;
+
+    /**
+     * @type {number}
+     */
     this.gridHeight = h;
+
+    /**
+     * @type {number}
+     */
     this.minMatchingCount = 3;
+
+    /**
+     * @type {boolean}
+     */
     this.isEnabled = true;
 
     this.firstSelected = null;
@@ -136,7 +148,7 @@ export default class Board extends GameObject {
     for (let i = 0; i < this.grid.length; i++) {
       for (let j = 0; j < this.grid[i].length; j++) {
         let item = this.grid[i][j];
-        let matchingItems = this.getMatchingItems(item, item.type);
+        let matchingItems = this.getMatchingItems(item);
 
         if (matchingItems.length >= this.minMatchingCount - 1) {
           matchingItems.unshift(item);
@@ -221,9 +233,8 @@ export default class Board extends GameObject {
     this.selectedItems = [];
   }
 
-  onUpdate(dt) {
+  onUpdate() {
     if (Black.input.isPointerDown && this.isEnabled) {
-      this.clicked = true;
       this.trySelect();
     }
   }

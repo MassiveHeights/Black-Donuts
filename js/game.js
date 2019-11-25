@@ -10,59 +10,96 @@ import ScorePopup from './objects/score-popup';
 import TextPopup from './objects/text-popup';
 import LP from './lp';
 
-import bg from 'assets/textures/background.jpg';
-import assets_png from 'assets/atlas/assets.png';
-import assets_json from 'assets/atlas/assets.json';
-
-import bg_mp3 from 'assets/audio/background.mp3';
-import itemKill from 'assets/audio/kill.mp3';
-import select_1 from 'assets/audio/select-1.mp3';
-import select_2 from 'assets/audio/select-2.mp3';
-import select_3 from 'assets/audio/select-3.mp3';
-import select_4 from 'assets/audio/select-4.mp3';
-import select_5 from 'assets/audio/select-5.mp3';
-import select_6 from 'assets/audio/select-6.mp3';
-import select_7 from 'assets/audio/select-7.mp3';
-import select_8 from 'assets/audio/select-8.mp3';
-import select_9 from 'assets/audio/select-9.mp3';
-
 export default class Game extends GameObject {
   constructor() {
     super();
+
+
     this.touchable = true;
+
+    /**
+     * @type {number}
+     */
     this.score = 0;
+
+    /**
+     * @type {number}
+     */
     this.targetScore = 500;
+
+    /**
+     * @type {boolean}
+     */
     this.tutorialVisible = false;
+
+    /**
+     * @type {boolean}
+     */
     this.ctaInited = false;
 
+    /**
+     * @type {number}
+     */
     this.hintOnIdleTime = 6;
-    this.lastActionTime = 0;
-    this.selectSounds = ['select-1', 'select-2', 'select-3', 'select-4', 'select-5', 'select-6', 'select-7', 'select-8', 'select-9',];
 
+    /**
+     * @type {number}
+     */
+    this.lastActionTime = 0;
+
+    /**
+     * @type {Array<string>}
+     */
+    this.selectSounds = [
+      'select-1',
+      'select-2',
+      'select-3',
+      'select-4',
+      'select-5',
+      'select-6',
+      'select-7',
+      'select-8',
+      'select-9',
+    ];
+
+    /** @type {Array<string>} */
     this.textPopupPraises = ['Awesome', 'Good', 'Amazing', 'Impressive'];
+
+    /** @type {number} */
     this.praiseOn = 5;
+
+    /** @type {Board|null} */
+    this.board = null;
+
+    /** @type {Hint|null} */
+    this.hint = null;
+
+    /** @type {FXTrail|null} */
+    this.fxTrail = null;
+
+    /** @type {TextTable|null} */
+    this.textTable = null;
+
+    /** @type {Graphics|null} */
+    this.selection = null;
+
+    /** @type {TextPopup|null} */
+    this.textPopup = null;
+
     this.load();
   }
 
   load() {
-    let assets = new AssetManager();
+    var assets = new AssetManager();
 
-    assets.enqueueImage('bg', bg);
-    assets.enqueueAtlas('assets', assets_png, assets_json);
+    assets.defaultPath = './assets/';
+    assets.enqueueImage('bg', 'background.jpg');
+    assets.enqueueAtlas('assets', 'assets.png', 'assets.json');
     assets.enqueueGoogleFont('Fredoka One');
 
-    assets.enqueueSound('background', bg_mp3);
-    assets.enqueueSound('itemKill', itemKill);
-
-    assets.enqueueSound('select-1', select_1);
-    assets.enqueueSound('select-2', select_2);
-    assets.enqueueSound('select-3', select_3);
-    assets.enqueueSound('select-4', select_4);
-    assets.enqueueSound('select-5', select_5);
-    assets.enqueueSound('select-6', select_6);
-    assets.enqueueSound('select-7', select_7);
-    assets.enqueueSound('select-8', select_8);
-    assets.enqueueSound('select-9', select_9);
+    assets.enqueueSound('background', 'background.mp3');
+    assets.enqueueSound('itemKill', 'kill.mp3');
+    this.selectSounds.forEach(x => assets.enqueueSound(x, x + '.mp3'));
 
     assets.on('complete', this.onAssetsLoadded, this);
 
@@ -74,31 +111,33 @@ export default class Game extends GameObject {
 
     this.addChild(new Background('bg'));
 
-    this.board = this.addChild(new Board());
-    this.board.x = this.stage.centerX;
-    this.board.y = this.stage.centerY;
-
+    this.board = new Board(LP(7, 6), LP(5, 8))
+    this.board.x = this.stage.centerX + 15;
+    this.board.y = this.stage.centerY + 50;
     this.board.on('pointerDown', x => this.hint.hide(), this);
     this.board.on('kill', this.onItemsKilled, this);
     this.board.on('selected', this.onItemSelected, this);
     this.board.on('allDeselected', this.onAllDeselected, this);
+    this.addChild(this.board);
 
-    this.fxTrail = this.addChild(new FXTrail());
-    this.textTable = this.addChild(new TextTable());
-    this.selection = this.addChild(new Graphics());
-    this.textPopup = this.addChild(new TextPopup());
+    this.fxTrail = new FXTrail();
+    this.textTable = new TextTable();
+    this.selection = new Graphics();
+    this.add(this.fxTrail, this.textTable, this.selection);
+
+    this.textPopup = new TextPopup();
     this.textPopup.x = this.stage.centerX;
     this.textPopup.y = this.stage.centerY;
+    this.addChild(this.textPopup);
 
-    this.textTable.setScore(`Score: ${this.score}/${this.targetScore}`);
-
-    this.hint = this.addChild(new Hint());
+    this.hint = new Hint()
     this.stage.on('resize', this.onResize, this);
+    this.addChild(this.hint);
 
     this.onResize();
 
-    let initialY = 5;
-    this.textTable.y = - 200;
+    let initialY = 150;
+    this.textTable.y = -200;
 
     let tween = new Tween({ y: initialY }, 0.5, { delay: 0.5, ease: Ease.cubicOut });
     tween.on('start', this.showHint, this);
@@ -205,11 +244,11 @@ export default class Game extends GameObject {
 
   onUpdate() {
     if (Black.input.isPointerDown) {
-      this.lastActionTime = Time.now;
+      this.lastActionTime = Black.time.now;
       return;
     }
 
-    if (this.hint && Time.now - this.lastActionTime > this.hintOnIdleTime && this.hint.inProgress === false && this.board.isEnabled) {
+    if (this.hint && Black.time.now - this.lastActionTime > this.hintOnIdleTime && this.hint.inProgress === false && this.board.isEnabled) {
       this.showHint();
     }
   }

@@ -1,13 +1,15 @@
-import { Acceleration, Black, BlendMode, Emitter, FloatScatter, GameObject, InitialLife, InitialVelocity, ScaleOverLife } from 'black-engine';
+import { Black, GameObject, FloatScatter, Emitter, AssetManager, InitialLife, ScaleOverLife, BlendMode, Acceleration, InitialVelocity } from 'black-engine';
 
 export default class FXBoom extends GameObject {
-  constructor(type) {
+  constructor() {
     super();
-    this.type = type;
+
+    /** @type {Emitter|null} */
+    this.emitter = null;
   }
 
   onAdded() {
-    this.emitter = this.addChild(new Emitter());
+    this.emitter = new Emitter();
 
     this.emitter.emitCount = new FloatScatter(2);
     this.emitter.emitDelay = new FloatScatter(0);
