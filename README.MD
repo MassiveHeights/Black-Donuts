@@ -1,7 +1,8 @@
 # Black Donuts
 Simple demo app to show some of Black Engine features:
+
+- Google Closure Compiler support
 - AssetManager to preload assets
-- Multi resolution (works on any device and both orientations)
 - Battery consumption on static scenes
 - Auto updateable cache as bitmap
 - Clipping rectangle (works for cacheAsBitmap objects)
